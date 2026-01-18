@@ -24,3 +24,45 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ===== TEXT BASELINE FIX ===== */
+* {
+  color: #111827;
+}
+
+/* ===== PLACEHOLDER FIX ===== */
+::placeholder {
+  color: #9CA3AF;
+  opacity: 1; /* Safari */
+}
+
+/* ===== INPUT / TEXTAREA ===== */
+input,
+textarea,
+select {
+  color: #111827;
+  background-color: #ffffff;
+}
+
+/* ===== HEADINGS INSIDE CARDS ===== */
+h2, h3, h4, h5 {
+  color: #111827;
+}
+
+/* ===== MUTED HELP TEXT (explicit only) ===== */
+.text-muted {
+  color: #6B7280;
+}
+/* ================================
+   FORCE SEMANTIC TEXT COLOR
+   (Tailwind override)
+   ================================ */
+
+h1, h2, h3, h4, h5, h6,
+p,
+label,
+span,
+li,
+strong {
+  color: var(--foreground);
+}
