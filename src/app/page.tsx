@@ -622,19 +622,31 @@ function App() {
           </div>
 
           <div style={{ display: 'flex', gap: '12px', paddingTop: '16px' }}>
-            <button style={{
-              flex: 1,
-              padding: '12px 24px',
-              background: '#2563EB',
-              color: 'white',
-              border: 'none',
-              borderRadius: '8px',
-              fontWeight: '500',
-              cursor: 'pointer',
-              fontSize: '14px'
-            }}>
-              Submit for Review
-            </button>
+            <button
+  onClick={async () => {
+    await fetch('/api/pilot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    alert('Submitted! We’ll be in touch.');
+  }}
+  style={{
+    flex: 1,
+    padding: '12px 24px',
+    background: '#2563EB',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    fontSize: '14px'
+  }}
+>
+  Submit for Review
+</button>
+
             <button style={{
               padding: '12px 24px',
               background: 'white',
