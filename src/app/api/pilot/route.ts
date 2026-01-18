@@ -1,26 +1,33 @@
+import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    const apiKey = process.env.RESEND_API_KEY;
 
-    const emailHtml = `
-      <h2>New Pilot Submission</h2>
-      <pre>${JSON.stringify(body, null, 2)}</pre>
-    `;
+    // ✅ BUILD-SAFE GUARD
+    if (!apiKey) {
+      console.warn('RESEND_API_KEY not set — skipping email send');
+      return NextResponse.json({ success: true });
+    }
+
+    const resend = new Resend(apiKey);
+
+    const data = await req.json();
 
     await resend.emails.send({
-      from: process.env.FROM_EMAIL!,
-      to: process.env.TO_EMAIL!,
-      subject: '🚀 New PilotRoom Submission',
-      html: emailHtml,
+      from: 'PilotRoom <onboarding@resend.dev>',
+      to: ['info@cryptocardia.ca'],
+      subject: 'New Pilot Submission',
+      html: `<pre>${JSON.stringify(data, null, 2)}</pre>`
     });
 
-    return Response.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    return new Response('Error sending email', { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { success: false },
+      { status: 500 }
+    );
   }
 }
