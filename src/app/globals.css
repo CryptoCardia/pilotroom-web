@@ -1,23 +1,16 @@
 @import "tailwindcss";
 
+/* =========================
+   LOCK COLOR MODE (NO AUTO DARK)
+   ========================= */
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #111827;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ❌ REMOVE prefers-color-scheme COMPLETELY */
+/* Do NOT let OS/browser override your design */
 
 body {
   background: var(--background);
@@ -25,44 +18,47 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ===== TEXT BASELINE FIX ===== */
+/* =========================
+   HARD BASELINE
+   ========================= */
+
 * {
   color: #111827;
 }
 
-/* ===== PLACEHOLDER FIX ===== */
-::placeholder {
-  color: #9CA3AF;
-  opacity: 1; /* Safari */
-}
+/* =========================
+   FORM ELEMENTS
+   ========================= */
 
-/* ===== INPUT / TEXTAREA ===== */
 input,
 textarea,
-select {
+select,
+button {
   color: #111827;
   background-color: #ffffff;
 }
 
-/* ===== HEADINGS INSIDE CARDS ===== */
-h2, h3, h4, h5 {
+/* =========================
+   PLACEHOLDERS
+   ========================= */
+
+::placeholder {
+  color: #9CA3AF;
+  opacity: 1;
+}
+
+/* =========================
+   HEADINGS
+   ========================= */
+
+h1, h2, h3, h4, h5, h6 {
   color: #111827;
 }
 
-/* ===== MUTED HELP TEXT (explicit only) ===== */
+/* =========================
+   MUTED (ONLY WHEN YOU ASK)
+   ========================= */
+
 .text-muted {
   color: #6B7280;
-}
-/* ================================
-   FORCE SEMANTIC TEXT COLOR
-   (Tailwind override)
-   ================================ */
-
-h1, h2, h3, h4, h5, h6,
-p,
-label,
-span,
-li,
-strong {
-  color: var(--foreground);
 }
