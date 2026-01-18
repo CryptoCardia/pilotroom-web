@@ -624,20 +624,16 @@ function App() {
           <div style={{ display: 'flex', gap: '12px', paddingTop: '16px' }}>
             <button
   onClick={async () => {
-    // 1️⃣ Send pilot submission email
+    // 1️⃣ Send pilot data (email)
     await fetch('/api/pilot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
 
-    // 2️⃣ Create Stripe Checkout session
+    // 2️⃣ Create Stripe checkout session
     const res = await fetch('/api/pilot/checkout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        pilotTitle: formData.pilotTitle,
-      }),
     });
 
     const { url } = await res.json();
@@ -654,7 +650,7 @@ function App() {
     borderRadius: '8px',
     fontWeight: '500',
     cursor: 'pointer',
-    fontSize: '14px'
+    fontSize: '14px',
   }}
 >
   Submit for Review
