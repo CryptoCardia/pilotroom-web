@@ -624,13 +624,26 @@ function App() {
           <div style={{ display: 'flex', gap: '12px', paddingTop: '16px' }}>
             <button
   onClick={async () => {
+    // 1️⃣ Send pilot submission email
     await fetch('/api/pilot', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
     });
 
-    alert('Submitted! We’ll be in touch.');
+    // 2️⃣ Create Stripe Checkout session
+    const res = await fetch('/api/pilot/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        pilotTitle: formData.pilotTitle,
+      }),
+    });
+
+    const { url } = await res.json();
+
+    // 3️⃣ Redirect to Stripe
+    window.location.href = url;
   }}
   style={{
     flex: 1,
